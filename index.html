@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jimbo Sito</title>
+    <title>WILDUNK</title> <!-- Nome del sito aggiornato -->
+    <!-- Collegamento a Font Awesome per le icone social -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Stili Navbar */
         .navbar {
@@ -66,7 +68,8 @@
 
         /* Stili Esistenti */
         body {
-            padding-top: 60px; /* Spazio per la navbar fissa */
+            padding-top: 10px;
+             /* Spazio per la navbar fissa */
             margin: 0;
             display: flex;
             flex-direction: column; /* Per allineare l'immagine e il contenitore verticalmente */
@@ -95,7 +98,7 @@
         .collection-container {
             text-align: center; /* Centra il testo e gli elementi inline-block */
             position: absolute; /* Posizionamento assoluto */
-            top: 1670px; /* Altezza desiderata dall'inizio del body */
+            top: 1620px; /* Altezza desiderata dall'inizio del body */
             left: 50%; /* Centra orizzontalmente */
             transform: translateX(-50%); /* Corregge il centraggio orizzontale */
             width: 100%; /* Occupa tutta la larghezza per centrare i bottoni con margin: auto */
@@ -109,63 +112,73 @@
             margin-bottom: 10px;
         }
 
-        /* NUOVI STILI PER I BOTTONI */
+        /* Stili per i BOTTONI (mantenuti come da ultima richiesta) */
         .collection-button {
-            background-color: #fff81f; /* Viola simile all'immagine */
+            background-color: #fff81f; /* Giallo */
             color: rgb(0, 0, 0);
             border: none;
-            padding: 35px 30px; /* Padding aumentato per un bottone più grande */
-            font-size: 1.5em; /* Dimensione del font aumentata */
-            font-weight: bold; /* Testo in grassetto */
-            font-family: 'Arial Black', Gadget, sans-serif; /* Font più "blocky" */
-            border-radius: 10px; /* Angoli arrotondati */
+            padding: 35px 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            border-radius: 10px;
             cursor: pointer;
-            text-decoration: none; /* Rimuove la sottolineatura dai link */
+            text-decoration: none;
 
-            /* Per impilare e centrare i bottoni */
-            display: block; /* Ogni bottone occupa una riga intera */
-            width: fit-content; /* Larghezza si adatta al contenuto */
-            max-width: 90%; /* Assicura che il bottone sia responsivo su schermi piccoli */
-            margin: 10px auto; /* 10px di margine sopra/sotto, "auto" per centrare orizzontalmente */
+            display: block;
+            width: fit-content;
+            max-width: 90%;
+            margin: 10px auto;
 
-            transition: background-color 0.3s ease; /* Effetto di transizione per il passaggio del mouse */
+            transition: background-color 0.3s ease;
         }
 
         .collection-button:hover {
-            background-color: #d7d40d; /* Viola leggermente più scuro al passaggio del mouse */
+            background-color: #d7d40d; /* Giallo più scuro al hover */
         }
 
         /* Stili per il footer */
         .site-footer {
-            background-color: #000; /* Sfondo nero */
+            background-color: #3a1775; /* Sfondo nero */
             color: white;
+            height: 300px;
             padding: 30px 20px; /* Più padding per un aspetto migliore */
             width: 100%;
             box-sizing: border-box;
-            /* Se necessario, aggiungere position: absolute e bottom: 0 per un footer fisso in fondo pagina,
-               ma attenzione con contenuti molto lunghi */
+            /* Rimuoviamo position:absolute e bottom:0 per ora,
+               perché con contenuti lunghi potrebbe sovrapporsi.
+               Considerare un footer sticky o relativo al flusso del documento.
+               Per ora, lo lasciamo alla fine del flusso normale del body. */
+            margin-top: auto; /* Spinge il footer in fondo se il contenuto è insufficiente */
         }
 
         .footer-content {
             display: flex;
             flex-direction: column; /* Stack verticalmente su mobile */
-            align-items: center;
-            text-align: center;
+            align-items: center; /* Centra gli elementi orizzontalmente */
+            text-align: center; /* Centra il testo */
+            max-width: 1200px; /* Limita la larghezza del contenuto su schermi grandi */
+            margin: 0 auto; /* Centra il contenuto del footer */
+        }
+
+        /* NUOVI STILI PER LE ICONE SOCIAL NEL FOOTER */
+        .social-links {
+            margin-bottom: 20px; /* Spazio tra i link social e il copyright */
         }
 
         .social-links a {
             color: white;
             text-decoration: none;
-            margin: 0 10px; /* Spaziatura tra i link */
-            font-size: 1em;
+            margin: 0 15px; /* Spaziatura tra le icone */
+            font-size: 1.8em; /* Rende le icone più grandi */
+            transition: color 0.3s ease; /* Effetto di transizione per il passaggio del mouse */
         }
 
         .social-links a:hover {
-            text-decoration: underline;
+            color: #6A37FF; /* Colore viola dei bottoni al passaggio del mouse */
         }
 
         .copyright-text {
-            margin-top: 15px; /* Spazio sopra il testo di copyright */
             font-size: 0.9em;
         }
 
@@ -175,8 +188,8 @@
                 flex-direction: row; /* Layout orizzontale */
                 justify-content: space-between; /* Spazio tra link e copyright */
             }
-            .copyright-text {
-                margin-top: 0; /* Rimuove il margine superiore */
+            .social-links {
+                margin-bottom: 0; /* Rimuove il margine superiore */
             }
         }
     </style>
@@ -209,19 +222,26 @@
          <!-- I bottoni sono stati modificati come richiesto -->
         <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>
         <div style="height: 3120px;"></div>
-        <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>§
-        <div style="height: 1770px;"></div>
+        <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>
+        <div style="height: 1800px;"></div>
         <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>
      </div>
 
     <footer class="site-footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" target="_blank">YouTube</a>
-                <a href="#" target="_blank">Instagram</a>
-                <!-- Aggiungi altri social link qui se necessario -->
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <!-- X (Twitter) -->
+                <a href="https://twitter.com/yourprofile" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                <!-- Discord -->
+                <a href="https://discord.gg/yourserver" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <!-- Telegram -->
+                <a href="https://t.me/yourchannel" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
             </div>
-            <p class="copyright-text">© 2023 Jimbo. Tutti i diritti riservati.</p>
+            <p class="copyright-text">© 2023 WILDUNK. Tutti i diritti riservati.</p> <!-- Copyright aggiornato -->
         </div>
     </footer>
 </body>
