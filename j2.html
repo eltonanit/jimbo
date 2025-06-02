@@ -66,9 +66,8 @@
 
         /* Stili Esistenti */
         body {
-            padding-top: 200px; /* Aumentato significativamente il padding per distanziare lo sfondo dalla navbar */
+            padding-top: 60px; /* Spazio per la navbar fissa */
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column; /* Per allineare l'immagine e il contenitore verticalmente */
             align-items: center; /* Centra gli elementi figli orizzontalmente */
@@ -77,10 +76,9 @@
             position: relative; /* Necessario per il posizionamento assoluto del figlio */
         }
         img.sito-image {
-            padding-top: 50px;
-            width: 400px;
-            
-            height: 7036px;
+            padding-top: 50px; /* Spazio aggiuntivo sopra l'immagine sotto la navbar */
+            width: 400px; /* Larghezza fissa come da originale */
+            height: 7036px; /* Altezza fissa come da originale */
             max-width: 100%; /* Assicura che l'immagine non superi la larghezza dello schermo */
             height: auto; /* Mantiene le proporzioni se max-width interviene */
             display: block; /* Rimuove spazio extra sotto l'immagine */
@@ -95,13 +93,14 @@
 
         /* Stili per il contenitore della collezione */
         .collection-container {
-            text-align: center; /* Centra il contenuto */
+            text-align: center; /* Centra il testo e gli elementi inline-block */
             position: absolute; /* Posizionamento assoluto */
-            top: 2000px; /* Altezza desiderata dall'inizio del body */
+            top: 1710px; /* Altezza desiderata dall'inizio del body */
             left: 50%; /* Centra orizzontalmente */
             transform: translateX(-50%); /* Corregge il centraggio orizzontale */
-            width: 100%; /* Occupa tutta la larghezza per centrare il testo e il bottone */
+            width: 100%; /* Occupa tutta la larghezza per centrare i bottoni con margin: auto */
             padding-bottom: 30px; /* Spazio sotto il contenitore */
+            box-sizing: border-box; /* Include padding nel width */
         }
 
         .collection-count {
@@ -110,72 +109,74 @@
             margin-bottom: 10px;
         }
 
+        /* NUOVI STILI PER I BOTTONI */
         .collection-button {
-            background-color: #007bff; /* Un blu standard per i bottoni */
-            color: white;
+            background-color: #fff81f; /* Viola simile all'immagine */
+            color: rgb(0, 0, 0);
             border: none;
-            padding: 15px 30px;
-            font-size: 1em;
-            border-radius: 5px;
+            padding: 35px 30px; /* Padding aumentato per un bottone più grande */
+            font-size: 1.5em; /* Dimensione del font aumentata */
+            font-weight: bold; /* Testo in grassetto */
+            font-family: 'Arial Black', Gadget, sans-serif; /* Font più "blocky" */
+            border-radius: 10px; /* Angoli arrotondati */
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            text-decoration: none; /* Rimuove la sottolineatura dai link */
+
+            /* Per impilare e centrare i bottoni */
+            display: block; /* Ogni bottone occupa una riga intera */
+            width: fit-content; /* Larghezza si adatta al contenuto */
+            max-width: 90%; /* Assicura che il bottone sia responsivo su schermi piccoli */
+            margin: 10px auto; /* 10px di margine sopra/sotto, "auto" per centrare orizzontalmente */
+
+            transition: background-color 0.3s ease; /* Effetto di transizione per il passaggio del mouse */
         }
 
         .collection-button:hover {
-            background-color: #0056b3; /* Un blu più scuro al hover */
+            background-color: #d7d40d; /* Viola leggermente più scuro al passaggio del mouse */
         }
 
         /* Stili per il footer */
         .site-footer {
-            background: linear-gradient(90deg, #1a1a2e, #16213e); /* Gradiente futuristico */
-            color: #e0e0e0; /* Colore testo leggermente più chiaro */
-            padding: 40px 20px; /* Più padding */
+            background-color: #000; /* Sfondo nero */
+            color: white;
+            padding: 30px 20px; /* Più padding per un aspetto migliore */
             width: 100%;
             box-sizing: border-box;
-            border-top: 2px solid #0f3460; /* Bordo superiore sottile */
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3); /* Ombreggiatura sottile */
-            border-radius: 10px 10px 0 0; /* Bordi superiori arrotondati */
+            /* Se necessario, aggiungere position: absolute e bottom: 0 per un footer fisso in fondo pagina,
+               ma attenzione con contenuti molto lunghi */
         }
 
         .footer-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stack verticalmente su mobile */
             align-items: center;
             text-align: center;
-            max-width: 1200px; /* Limita la larghezza del contenuto */
-            margin: 0 auto; /* Centra il contenuto */
-        }
-
-        .social-links {
-            margin-bottom: 20px; /* Spazio sotto i link social */
         }
 
         .social-links a {
-            color: #e94560; /* Colore accento per i link */
+            color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1em;
-            transition: color 0.3s ease, transform 0.3s ease; /* Transizione per hover */
+            margin: 0 10px; /* Spaziatura tra i link */
+            font-size: 1em;
         }
 
         .social-links a:hover {
-            color: #ff7b9c; /* Colore più chiaro al hover */
-            transform: translateY(-3px); /* Effetto leggero di sollevamento */
+            text-decoration: underline;
         }
 
         .copyright-text {
+            margin-top: 15px; /* Spazio sopra il testo di copyright */
             font-size: 0.9em;
-            color: #a0a0a0; /* Colore testo copyright più tenue */
         }
 
         /* Media query per layout orizzontale su schermi più grandi */
         @media (min-width: 768px) {
             .footer-content {
-                flex-direction: row;
-                justify-content: space-between;
+                flex-direction: row; /* Layout orizzontale */
+                justify-content: space-between; /* Spazio tra link e copyright */
             }
-            .social-links {
-                margin-bottom: 0;
+            .copyright-text {
+                margin-top: 0; /* Rimuove il margine superiore */
             }
         }
     </style>
@@ -185,7 +186,7 @@
         <div class="navbar-logo">
             <a href="j2.html"><img src="img/logo.png" alt="Logo"></a>
         </div>
-        <div class="hamburger-icon" onclick="toggleMenu()">&#9776;</div>
+        <div class="hamburger-icon" onclick="toggleMenu()">☰</div>
     </nav>
     <div class="menu" id="sideMenu">
         <ul>
@@ -205,12 +206,13 @@
     <img src="img/SITO.png" alt="Sito Jimbo" class="sito-image" width="400" height="7036">
 
     <div class="collection-container">
-        <p class="collection-count">50 ncollection</p>
-        <button class="collection-button">View Collections</button>
-        <button class="collection-button">View Collections</button>
-        <button class="collection-button">View Collections</button>
-        <button class="collection-button">View Collections</button>
-    </div>
+         <!-- I bottoni sono stati modificati come richiesto -->
+        <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>
+        <div style="height: 3200px;"></div>
+        <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>§
+        <div style="height: 1820px;"></div>
+        <a href="https://magiceden.io/solana" class="collection-button" target="_blank">View Collection</a>
+     </div>
 
     <footer class="site-footer">
         <div class="footer-content">
@@ -219,7 +221,7 @@
                 <a href="#" target="_blank">Instagram</a>
                 <!-- Aggiungi altri social link qui se necessario -->
             </div>
-            <p class="copyright-text">&copy; 2023 Jimbo. Tutti i diritti riservati.</p>
+            <p class="copyright-text">© 2023 Jimbo. Tutti i diritti riservati.</p>
         </div>
     </footer>
 </body>
