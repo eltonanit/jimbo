@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jimbo Sito</title>
+    <style>
+        /* Stili Navbar */
+        .navbar {
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; /* Fissa la navbar in alto */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Assicura che sia sopra gli altri contenuti */
+            box-sizing: border-box; /* Include padding e border nel width/height totale */
+        }
+
+        .navbar-logo img {
+            height: 40px; /* Altezza del logo, aggiustare se necessario */
+        }
+
+        .hamburger-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none; /* Nascosto di default */
+            position: fixed;
+            top: 60px; /* Altezza della navbar */
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Sfondo leggermente diverso per distinguerlo */
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 999; /* Sotto la navbar ma sopra il resto */
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .menu ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu ul li a:hover {
+            background-color: #555;
+        }
+
+        .menu.active {
+            display: block;
+        }
+
+        /* Stili Esistenti */
+        body {
+            padding-top: 200px; /* Aumentato significativamente il padding per distanziare lo sfondo dalla navbar */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Per allineare l'immagine e il contenitore verticalmente */
+            align-items: center; /* Centra gli elementi figli orizzontalmente */
+            min-height: 100vh; /* Assicura che il body prenda almeno l'altezza della viewport */
+            background-color: #100329; /* Sfondo generico per vedere l'immagine */
+            position: relative; /* Necessario per il posizionamento assoluto del figlio */
+        }
+        img.sito-image {
+            padding-top: 50px;
+            width: 400px;
+            
+            height: 7036px;
+            max-width: 100%; /* Assicura che l'immagine non superi la larghezza dello schermo */
+            height: auto; /* Mantiene le proporzioni se max-width interviene */
+            display: block; /* Rimuove spazio extra sotto l'immagine */
+        }
+        /* Media query per schermi più grandi dove l'immagine può essere mostrata alla sua larghezza fissa */
+        @media (min-width: 420px) { /* Leggermente più grande di 400px per padding/margini */
+            img.sito-image {
+                width: 400px; /* Larghezza fissa */
+                height: 7036px; /* Altezza fissa */
+            }
+        }
+
+        /* Stili per il contenitore della collezione */
+        .collection-container {
+            text-align: center; /* Centra il contenuto */
+            position: absolute; /* Posizionamento assoluto */
+            top: 2000px; /* Altezza desiderata dall'inizio del body */
+            left: 50%; /* Centra orizzontalmente */
+            transform: translateX(-50%); /* Corregge il centraggio orizzontale */
+            width: 100%; /* Occupa tutta la larghezza per centrare il testo e il bottone */
+            padding-bottom: 30px; /* Spazio sotto il contenitore */
+        }
+
+        .collection-count {
+            font-size: 1.2em;
+            color: #fff; /* Testo bianco, assumendo che lo sfondo sia scuro */
+            margin-bottom: 10px;
+        }
+
+        .collection-button {
+            background-color: #007bff; /* Un blu standard per i bottoni */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .collection-button:hover {
+            background-color: #0056b3; /* Un blu più scuro al hover */
+        }
+
+        /* Stili per il footer */
+        .site-footer {
+            background: linear-gradient(90deg, #1a1a2e, #16213e); /* Gradiente futuristico */
+            color: #e0e0e0; /* Colore testo leggermente più chiaro */
+            padding: 40px 20px; /* Più padding */
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 2px solid #0f3460; /* Bordo superiore sottile */
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3); /* Ombreggiatura sottile */
+            border-radius: 10px 10px 0 0; /* Bordi superiori arrotondati */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 1200px; /* Limita la larghezza del contenuto */
+            margin: 0 auto; /* Centra il contenuto */
+        }
+
+        .social-links {
+            margin-bottom: 20px; /* Spazio sotto i link social */
+        }
+
+        .social-links a {
+            color: #e94560; /* Colore accento per i link */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s ease, transform 0.3s ease; /* Transizione per hover */
+        }
+
+        .social-links a:hover {
+            color: #ff7b9c; /* Colore più chiaro al hover */
+            transform: translateY(-3px); /* Effetto leggero di sollevamento */
+        }
+
+        .copyright-text {
+            font-size: 0.9em;
+            color: #a0a0a0; /* Colore testo copyright più tenue */
+        }
+
+        /* Media query per layout orizzontale su schermi più grandi */
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .social-links {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="j2.html"><img src="img/logo.png" alt="Logo"></a>
+        </div>
+        <div class="hamburger-icon" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+    <div class="menu" id="sideMenu">
+        <ul>
+            <li><a href="#">Squadra 1</a></li>
+            <li><a href="#">Squadra 2</a></li>
+            <li><a href="#">Squadra 3</a></li>
+            <li><a href="#">Squadra 4</a></li>
+            <li><a href="#">Squadra 5</a></li>
+            <li><a href="#">Squadra 6</a></li>
+            <li><a href="#">Squadra 7</a></li>
+            <li><a href="#">Squadra 8</a></li>
+            <li><a href="#">Squadra 9</a></li>
+            <li><a href="#">Squadra 10</a></li>
+        </ul>
+    </div>
+
+    <img src="img/SITO.png" alt="Sito Jimbo" class="sito-image" width="400" height="7036">
+
+    <div class="collection-container">
+        <p class="collection-count">50 ncollection</p>
+        <button class="collection-button">View Collections</button>
+        <button class="collection-button">View Collections</button>
+        <button class="collection-button">View Collections</button>
+        <button class="collection-button">View Collections</button>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" target="_blank">YouTube</a>
+                <a href="#" target="_blank">Instagram</a>
+                <!-- Aggiungi altri social link qui se necessario -->
+            </div>
+            <p class="copyright-text">&copy; 2023 Jimbo. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+</body>
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById('sideMenu');
+        menu.classList.toggle('active');
+    }
+</script>
+</html>

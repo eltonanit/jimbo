@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilddunk - Fight for Supremacy</title>
+    <style>
+        /* 
+         * DEFINIZIONE DEL FONT "ROBOT CRUSH" 
+         */
+        @font-face {
+            font-family: 'Robot Crush';
+            src: url('robot_crush/Robot Crush.ttf') format('truetype'),
+                 url('robot_crush/Robot Crush.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap; 
+        }
+
+        @font-face {
+            font-family: 'Robot Crush'; 
+            src: url('robot_crush/Robot Crush Italic.ttf') format('truetype'),
+                 url('robot_crush/Robot Crush Italic.otf') format('opentype');
+            font-weight: normal;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-purple: #6A0DAD;
+            --primary-cyan: #00FFFF;
+            --primary-pink: #FF00FF;
+            --dark-bg: #0a0a1a;
+            --light-text: #e0e0ff;
+            --heading-font: 'Robot Crush', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            text-align: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .site-content-wrapper {
+            width: 400px;
+            min-height: 7036px;
+            background-image: url('img/SFONDO SITO.png');
+            background-size: 100% 100%;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 100%;
+            width: auto;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--heading-font);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #fff;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: var(--primary-cyan);
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: var(--primary-pink);
+        }
+
+        h4 {
+            font-size: 1.4em;
+        }
+
+        p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .section {
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .hero {
+            background: none;
+            height: 600px; /* Stima dell'altezza della sezione hero dell'immagine di sfondo */
+            padding: 0; 
+            display: block; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        .hero .logo-text {
+            position: absolute;
+            top: 70px; /* Regola questo valore per spostare il logo verticalmente (dall'alto) */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%; 
+            max-width: 250px; 
+            text-align: center;
+        }
+
+        .hero .logo-text img {
+            max-width: 100%; 
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .hero .tagline {
+            position: absolute;
+            top: 250px; /* Regola questo valore per spostare la tagline verticalmente (dall'alto) */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%; 
+            max-width: 350px; 
+            white-space: nowrap; 
+            font-family: var(--heading-font);
+            font-size: 1em; 
+            color: #fff; 
+            letter-spacing: 0.35em; 
+        }
+
+        /* Rimosso il selettore .character-preview perché l'elemento è stato rimosso dalla hero */
+
+        .stats-highlight {
+            font-family: var(--heading-font);
+            font-size: 4em;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stats-label {
+            font-family: var(--heading-font);
+            font-size: 1.8em;
+            color: var(--primary-cyan);
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-purple);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-family: var(--heading-font);
+            font-size: 1.2em;
+            text-transform: uppercase;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.5);
+        }
+
+        .btn:hover {
+            background-color: #8A2BE2;
+        }
+
+        .icon-placeholder {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Rimosse le regole CSS per .team-logos-grid e .team-logo-item */
+
+        /* ✨ INIZIO CORREZIONI E MODIFICHE DETTAGLIATE PER LA SEZIONE CARD-RARITY ✨ */
+
+        .section.card-rarity .container {
+            padding-top: 50px; 
+            padding-bottom: 50px; 
+            position: relative; /* Contenitore relativo per il posizionamento dei testi */
+        }
+
+        /* Stili per il titolo principale della sezione (sopra le carte) */
+        .section-title-card-rarity {
+            font-family: var(--heading-font);
+            color: #fff;
+            font-size: 1.3em; 
+            letter-spacing: 0.02em; /* Spaziatura leggermente più aperta per il titolo, come in foto */
+            text-transform: uppercase;
+            margin-bottom: 40px; 
+            line-height: 1.1; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); 
+        }
+
+        /* Contenitore per l'immagine delle carte e i testi sovrapposti */
+        .cards-display-area {
+            position: relative; 
+            width: 100%; /* Occupa la larghezza del container (400px) */
+            height: 930px; /* ✅ REGOLATO: Altezza precisa per allineare perfettamente CARDS.png */
+            /* ✨ CORREZIONI QUI: CARDS.png di nuovo come background-image, coprendo l'area */
+            background-image: url('img/CARDS.png');
+            background-size: 100% 100%; /* L'immagine riempirà esattamente larghezza e altezza del div */
+            background-repeat: no-repeat;
+            background-position: center top; 
+            /* ✨ FINE CORREZIONI BACKGROUND ✨ */
+            margin: 0 auto; 
+            overflow: hidden; 
+        }
+        
+        /* Rimosso .cards-display-area img perché l'immagine è ora background */
+
+        /* Stili generici per i blocchi di testo sovrapposti */
+        .card-text-overlay {
+            position: absolute; 
+            text-align: left; /* ✅ CORRETTO: Allineamento del testo a SINISTRA all'interno del suo blocco */
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 0.9; /* ✅ REGOLATO: Spaziatura verticale molto stretta */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+        }
+
+        /* Stili per i titoli delle carte (COMMON, RARE, SUPERARE) */
+        .card-text-overlay .card-title {
+            font-family: var(--heading-font);
+            font-size: 2.1em; /* ✅ REGOLATO: Dimensione del titolo */
+            letter-spacing: -0.1em; /* ✅ REGOLATO: Spaziatura MOLTO negativa per l'effetto compatto/pixelato */
+            margin-bottom: 2px; /* Spazio ridotto tra titolo e descrizioni */
+            white-space: nowrap; /* Forza il titolo su una singola riga */
+        }
+
+        /* Stili per le descrizioni delle carte */
+        .card-text-overlay .card-description {
+            font-family: var(--heading-font); 
+            font-size: 0.7em; /* ✅ REGOLATO: Dimensione delle descrizioni */
+            letter-spacing: -0.05em; /* ✅ REGOLATO: Spaziatura MOLTO negativa per l'effetto compatto/pixelato */
+            margin-bottom: 0;
+            color: #eee; 
+            line-height: 0.9; /* ✅ REGOLATO: Spaziatura verticale tra righe della descrizione più stretta */
+        }
+
+        /* Posizionamento specifico per ogni blocco di testo, FINALMENTE CORRETTO per stare a DESTRA delle carte */
+        /* Questi valori `left` sono stati calibrati per iniziare *dopo* la fine della carta nell'immagine di sfondo,
+           mentre `top` è stato finemente calibrato per l'allineamento verticale. */
+        .common-text {
+            top: 135px;  /* ✅ REGOLATO: Posizione verticale per COMMON */
+            left: 215px; /* ✨ CORRETTO: Inizia a 215px dal bordo sinistro, per essere ben a destra delle carte. ✨ */
+            width: 170px; /* ✅ REGOLATO: Larghezza per il testo, adattandosi allo spazio a destra */
+        }
+
+        .rare-text {
+            top: 430px;  /* ✅ REGOLATO: Posizione verticale per RARE */
+            left: 215px; /* ✨ CORRETTO: Inizia a 215px dal bordo sinistro. ✨ */
+            width: 170px; 
+        }
+
+        .superare-text {
+            top: 725px;  /* ✅ REGOLATO: Posizione verticale per SUPERARE */
+            left: 215px; /* ✨ CORRETTO: Inizia a 215px dal bordo sinistro. ✨ */
+            width: 170px; 
+        }
+
+        /* FINE CORREZIONI E MODIFICHE DETTAGLIATE PER LA SEZIONE CARD-RARITY */
+
+
+        .nft-icons-preview {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nft-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+
+        .nft-icon-1 {
+            background-color: var(--primary-purple);
+        }
+
+        .nft-icon-2 {
+            background-color: var(--primary-pink);
+        }
+
+        .nft-icon-3 {
+            background-color: var(--primary-cyan);
+        }
+
+        footer {
+            padding: 40px 20px;
+            background-color: #050510;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="site-content-wrapper">
+        <header class="hero">
+            <!-- Logo immagine -->
+            <div class="logo-text">
+                <img src="img/eeRisorsa 29.png" alt="Wilddunk Logo">
+            </div>
+            <!-- Tagline -->
+            <p class="tagline">FIGHT FOR SUPREMACY</p>
+        </header>
+
+        <main>
+            <section class="section stats-section">
+                <div class="container">
+                    <span class="stats-highlight">10</span>
+                    <span class="stats-label">SQUADS</span>
+
+                    <span class="stats-highlight">5</span>
+                    <span class="stats-label">MEMBER EACH</span>
+
+                    <span class="stats-highlight">50</span>
+                    <span class="stats-label">COLLECTIBLE CHARACTERS</span>
+
+                    <a href="#" class="btn">BUY ON MAGIC EDEN</a>
+                </div>
+            </section>
+
+            <section class="section world-intro">
+                <div class="container">
+                    <h2>A WORLD LIKE NO OTHERS</h2>
+                    <p>IMAGINE A PLANET ALMOST ENTIRELY COVERED BY WATER, WITH ONLY TEN SCATTERED ISLANDS RISING ABOVE THE
+                        SURFACE. EACH ISLAND IS HOME TO A UNIQUE ANIMAL COMMUNITY, EACH WITH ITS OWN CULTURE, TRADITIONS,
+                        AND WAY OF LIFE. BUT IN A WORLD WHERE RESOURCES ARE SCARCE AND DIPLOMACY IS COMPLEX, THE WILDDUNK
+                        TOURNAMENT WAS CREATED. A GLOBAL BASKETBALL COMPETITION THAT DETERMINES ECONOMIC SUPREMACY AND
+                        POLITICAL BALANCE. THE STAKES? THE FUTURE PROSPERITY OF EACH ISLAND AND ITS INHABITANTS!</p>
+                </div>
+            </section>
+
+            <section class="section tournament-info">
+                <div class="container">
+                    <!-- Assumendo COPPA.png sia un'icona/immagine separata da gestire, non il background -->
+                    <div class="icon-placeholder">
+                        <img src="img/COPPA.png" alt="coppa d'oro" style="max-width: 100px; height: auto; margin-bottom: 15px;">
+                    </div>
+                    <h2>ANIMAL WORLD CUP</h2>
+                    <p>EACH ISLAND SELECTS FIVE ELITE PLAYERS TO FORM A TEAM AND COMPETE IN THE WILDDUNK TOURNAMENT. WINNING
+                        THE TOURNAMENT GRANTS RESOURCES, INFLUENCE, AND PROSPERITY, MAKING IT THE MOST CRITICAL EVENT IN
+                        THIS WORLD.</p>
+                </div>
+            </section>
+
+            <section class="section team-logos">
+                <div class="container">
+                    <!-- Assumendo ISOLE LOGHI.png sia un'icona/immagine separata da gestire, non il background -->
+                    <div class="icon-placeholder">
+                        <img src="img/ISOLE LOGHI.png" alt="Isole Logo" style="max-width: 150px; height: auto; margin-bottom: 15px;">
+                    </div>
+                    <h2>OUR TEAM LOGOS</h2> <!-- Ho aggiunto un titolo per la sezione -->
+                    <!-- Il blocco team-logos-grid è stato rimosso -->
+                </div>
+            </section>
+
+            <section class="section card-rarity">
+                <div class="container">
+                    <!-- Titolo della sezione come in foto -->
+                    <p class="section-title-card-rarity">EACH CHCHARACTERS ARE RANK INTO<br>3 MAIN CLASSES BASED<br>ON THEIR ABILITIES.</p>
+
+                    <!-- Area per le carte e il testo sovrapposto -->
+                    <div class="cards-display-area">
+                        <!-- L'immagine CARDS.png è ora lo sfondo del div, non un tag <img> -->
+
+                        <!-- COMMON Card Text -->
+                        <div class="card-text-overlay common-text">
+                            <h4 class="card-title">COMMON</h4>
+                            <p class="card-description">COMMON CHARACTER</p>
+                            <p class="card-description">NORMAL SKILL</p>
+                        </div>
+                        <!-- RARE Card Text -->
+                        <div class="card-text-overlay rare-text">
+                            <h4 class="card-title">RARE</h4>
+                            <p class="card-description">STAR PLAYER</p>
+                            <p class="card-description">POWERFUL CHARACTER</p>
+                        </div>
+                        <!-- SUPERARE Card Text -->
+                        <div class="card-text-overlay superare-text">
+                            <h4 class="card-title">SUPERARE</h4>
+                            <p class="card-description">STAR PLAYER</p>
+                            <p class="card-description">POWERFUL</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section why-buy">
+                <div class="container">
+                    <h2>WHY SHOULD I BUY ONE?</h2>
+                    <div class="nft-icons-preview">
+                        <div class="nft-icon nft-icon-1">👤</div>
+                        <div class="nft-icon nft-icon-2">👤</div>
+                        <div class="nft-icon nft-icon-3">👤</div>
+                    </div>
+                    <p>WILDDUNK ISN'T JUST A GAME—IT'S AN EXCLUSIVE DIGITAL ART EXPERIENCE. EACH OF THE 50 NFTS IS
+                        METICULOUSLY HAND-DRAWN BY A TEAM OF WORLD-CLASS ARTISTS, ENSURING THAT EVERY CARD IS A TRUE
+                        MASTERPIECE. THESE ONE-OF-A-KIND DIGITAL COLLECTIBLES CAPTURE THE SPIRIT, INTENSITY, AND PASSION OF
+                        THE WILDDUNK UNIVERSE, MAKING THEM INVALUABLE ASSETS FOR COLLECTORS AND INVESTORS ALIKE.</p>
+                </div>
+            </section>
+
+            <section class="section solana-info">
+                <div class="container">
+                    <span class="icon-placeholder">🔗</span>
+                    <h3>MINTED ON SOLANA</h3>
+                    <p>ALL WILDDUNK NFTS WILL BE MINTED ON THE SOLANA BLOCKCHAIN, ENSURING FAST TRANSACTIONS, LOW FEES, AND
+                        A SEAMLESS EXPERIENCE FOR COLLECTORS AND TRADERS. SOLANA'S EFFICIENCY AND SCALABILITY MAKE IT THE
+                        PERFECT FOUNDATION FOR THIS EXCLUSIVE COLLECTION, PROVIDING SECURITY AND ACCESSIBILITY TO NFT
+                        ENTHUSIASTS WORLDWIDE.</p>
+                </div>
+            </section>
+
+            <section class="section merchandise-info">
+                <div class="container">
+                    <span class="icon-placeholder">👕</span>
+                    <h3>BEYOND DIGITAL: FASHION & LIFESTYLE</h3>
+                    <p>WILDDUNK IS MORE THAN AN NFT BRAND; IT'S A MOVEMENT. WITH AMBITIONS THAT STRETCH FAR BEYOND DIGITAL
+                        COLLECTIBLES, WILDDUNK IS SET TO EXPAND INTO THE WORLD OF FASHION AND LIFESTYLE, OFFERING HOODIES,
+                        T-SHIRTS, AND EXCLUSIVE MERCHANDISE THAT LET FANS SHOWCASE THEIR PASSION FOR THE GAME AND ITS
+                        INCREDIBLE UNIVERSE.</p>
+                </div>
+            </section>
+
+            <section class="section investment-info">
+                <div class="container">
+                    <span class="icon-placeholder">📈</span>
+                    <h3>LIMITED SUPPLY, UNLIMITED POTENTIAL</h3>
+                    <p>WITH ONLY 50 NFTS IN EXISTENCE, WILDDUNK IS DESIGNED TO BE AN ULTRA-RARE AND HIGHLY SOUGHT-AFTER
+                        COLLECTION. THE INITIAL LAUNCH PRICE WILL BE SET AT AN ACCESSIBLE LEVEL TO ENCOURAGE MASS ADOPTION,
+                        BUT AS DEMAND RISES AND AVAILABILITY SHRINKS, THE VALUE OF THESE UNIQUE COLLECTIBLES IS EXPECTED TO
+                        SKYROCKET.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <h2>JOIN THE WILDDUNK REVOLUTION!</h2>
+                <a href="#" class="btn">BUY ON MAGIC EDEN</a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
