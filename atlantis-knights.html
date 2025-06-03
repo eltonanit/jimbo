@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILDUNK</title>
+    <!-- Collegamento a Font Awesome per le icone social -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Collegamento a Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stili Generali del Body e Font per tutto il sito */
+        body {
+            font-family: 'Montserrat', sans-serif; /* Font moderno per tutto il sito */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #100329; /* Sfondo generale scuro */
+        }
+
+        /* Stili Navbar */
+        .navbar {
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+        }
+
+        .navbar-logo a {
+            cursor: pointer; /* Indica che il logo è cliccabile */
+        }
+
+        .hamburger-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Stili del Menu a tendina */
+        .menu {
+            display: none; /* Nascosto di default */
+            position: fixed;
+            top: 60px; /* Altezza della navbar */
+            left: 0;
+            width: 100%;
+            background-color: #000; /* Sfondo nero come richiesto */
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 999;
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto; /* Centra la lista orizzontalmente */
+            max-width: 350px; /* Larghezza massima per il contenuto del menu, aggiusta se necessario */
+        }
+
+        .menu ul li a {
+            display: flex; /* Usa flexbox per allineare elementi */
+            justify-content: flex-start; /* Allinea gli elementi a sinistra all'interno del link */
+            align-items: center; /* Centra verticalmente logo e nome */
+            padding: 15px 20px; /* Padding più generoso per un look più spazioso */
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 700; /* Rende il testo del menu più leggibile */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%; /* Il link occupa tutta la larghezza del suo ul parent */
+            box-sizing: border-box; /* Include padding nel calcolo della larghezza */
+        }
+        /* Rimuove il bordo inferiore sull'ultimo elemento per estetica */
+        .menu ul li:last-child a {
+            border-bottom: none;
+        }
+
+        .menu ul li a:hover {
+            background-color: #1a1a1a; /* Sfondo leggermente più scuro al hover */
+            color: #fff81f; /* Testo giallo al hover */
+        }
+        
+        .menu ul li a span {
+            text-transform: uppercase; /* Testo del nome della squadra tutto maiuscolo */
+            flex-grow: 1; /* Permette al nome di occupare lo spazio rimanente */
+            text-align: left; /* Allinea il testo a sinistra all'interno dello span */
+        }
+
+        /* Stili per i loghi delle squadre nel menu */
+        .menu ul li a img {
+            height: 40px; /* Altezza fissa per i loghi delle squadre */
+            width: auto; /* Mantiene le proporzioni */
+            min-width: 40px; /* Assicura che l'immagine mantenga una larghezza minima */
+            margin-right: 20px; /* Spazio costante tra logo e nome */
+            object-fit: contain; /* Assicura che l'immagine si adatti senza essere tagliata */
+        }
+
+        .menu.active {
+            display: block;
+        }
+
+        /* Nuovo Wrapper per Immagine e Bottoni (Homepage) */
+        #homepage-content {
+            margin-top: 60px; /* Spazio per la navbar fissa */
+            width: 100%; /* Occupa tutta la larghezza per contenere l'image-content-wrapper */
+            display: flex;
+            justify-content: center; /* Centra l'image-content-wrapper */
+        }
+
+        .image-content-wrapper {
+            position: relative;
+            width: 400px;
+            max-width: 100%;
+            height: auto;
+            /* margin-top rimosso da qui perché è su #homepage-content */
+        }
+
+        img.sito-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Stili per i BOTTONI (mantenuti con Arial Black) */
+        .collection-button {
+            background-color: #fff81f; /* Giallo */
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 35px 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Arial Black', Gadget, sans-serif; /* Mantenuto per i bottoni */
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            white-space: nowrap;
+            min-width: 250px;
+            max-width: 90%;
+
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .collection-button:hover {
+            background-color: #d7d40d; /* Giallo più scuro al hover */
+        }
+
+        /* POSIZIONAMENTO SPECIFICO PER OGNI BOTTONE (IN PERCENTUALE) */
+        .button-1 { top: 22.88%; }
+        .button-2 { top: 70.00%; }
+        .button-3 { top: 98.00%; }
+
+
+        /* Stili per la pagina delle singole squadre (dinamica) */
+        #team-page-display {
+            display: none; /* Nascosto di default */
+            width: 100%;
+            padding-top: 60px; /* Spazio per la navbar fissa */
+            min-height: calc(100vh - 60px); /* Assicura che occupi almeno l'altezza della viewport meno la navbar */
+            background-color: #1E0F3D; /* Viola/blu scuro come richiesto */
+            color: white; /* Testo bianco */
+            box-sizing: border-box;
+            flex-grow: 1; /* Permette al team page di occupare lo spazio disponibile sopra il footer */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra il contenuto orizzontalmente */
+        }
+
+        .team-content-inner {
+            text-align: center; /* Centra testo e immagini all'interno */
+            padding: 30px 20px;
+            max-width: 700px; /* Larghezza massima per il contenuto per una migliore leggibilità */
+            margin: 20px auto; /* Margine per distanziare dai bordi e centrare */
+            box-sizing: border-box; /* Include padding nel width */
+        }
+
+        .team-content-inner h1 {
+            text-transform: uppercase; /* Nome della squadra in maiuscolo */
+            font-size: 2.8em; /* Dimensione del font più grande */
+            margin-bottom: 25px;
+            font-weight: 700; /* Grassetto per il nome della squadra */
+            line-height: 1.2;
+        }
+
+        .team-content-inner img {
+            max-width: 200px; /* Dimensione del logo della squadra */
+            height: auto;
+            margin-bottom: 30px;
+            display: block; /* Per centrare l'immagine con margin: auto */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-content-inner p {
+            font-size: 1.1em; /* Dimensione della descrizione */
+            line-height: 1.8; /* Altezza della riga per una migliore leggibilità */
+            text-align: justify; /* Testo giustificato per un look pulito */
+            margin-bottom: 20px;
+        }
+
+        .back-to-home-btn {
+            background-color: #6A37FF; /* Un colore coerente o un nuovo colore */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 30px; /* Spazio dal testo sopra */
+            display: inline-block; /* Per permettere margin auto o centratura */
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-home-btn:hover {
+            background-color: #552AE6;
+        }
+
+        /* Stili per il footer */
+        .site-footer {
+            background-color: #3a1775; /* Sfondo viola scuro */
+            color: white;
+            padding: 30px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: auto; /* Spinge il footer in fondo */
+            flex-shrink: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Stili per le icone social nel footer */
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.8em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff81f; /* Colore giallo dei bottoni al passaggio del mouse */
+        }
+
+        .copyright-text {
+            font-size: 0.9em;
+        }
+
+        /* Media query per layout orizzontale su schermi più grandi */
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .social-links {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <!-- Il logo della navbar ora ha una funzione per tornare alla homepage -->
+            <a href="#" onclick="showHomepage(); return false;"><img src="img/logo.png" alt="Logo WILDUNK"></a>
+        </div>
+        <div class="hamburger-icon" onclick="toggleMenu()">☰</div>
+    </nav>
+    <div class="menu" id="sideMenu">
+        <ul>
+            <!-- Ogni link ora chiama la funzione showTeamPage con l'ID della squadra -->
+            <li>
+                <a href="#" onclick="showTeamPage('atlantis-knights'); return false;">
+                    <img src="squadre/1-atlantis-knights.png" alt="Atlantis Knights Logo">
+                    <span>Atlantis Knights</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('savage-ape'); return false;">
+                    <img src="squadre/2-savage-ape.png" alt="Savage Ape Logo">
+                    <span>Savage Ape</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('jurassic-stars'); return false;">
+                    <img src="squadre/3-jurassic-stars.png" alt="Jurassic Stars Logo">
+                    <span>Jurassic Stars</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('madogs'); return false;">
+                    <img src="squadre/4-madogs.png" alt="Madogs Logo">
+                    <span>Madogs</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('red-neck'); return false;">
+                    <img src="squadre/5-red-neck.png" alt="Red-Neck Logo">
+                    <span>Red-Neck</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('patriots'); return false;">
+                    <img src="squadre/6-patriots.png" alt="Patriots Logo">
+                    <span>Patriots</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('savana-clippers'); return false;">
+                    <img src="squadre/7-savana-clippers.png" alt="Savana Clippers Logo">
+                    <span>Savana Clippers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('golden'); return false;">
+                    <img src="squadre/8-golden.png" alt="Golden Logo">
+                    <span>Golden</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('northern'); return false;">
+                    <img src="squadre/9-northern.png" alt="Northern Logo">
+                    <span>Northern</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showTeamPage('aussie'); return false;">
+                    <img src="squadre/10-aussie.png" alt="Aussie Logo">
+                    <span>Aussie</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Contenuto della Homepage -->
+    <div id="homepage-content">
+        <div class="image-content-wrapper">
+            <img src="img/SITO.png" alt="Sito Jimbo" class="sito-image">
+
+            <a href="https://magiceden.io/solana" class="collection-button button-1" target="_blank">View Collection</a>
+            <a href="https://magiceden.io/solana" class="collection-button button-2" target="_blank">View Collection</a>
+            <a href="https://magiceden.io/solana" class="collection-button button-3" target="_blank">View Collection</a>
+        </div>
+    </div>
+
+    <!-- Contenuto della Pagina Squadra (inizialmente nascosto) -->
+    <div id="team-page-display">
+        <div class="team-content-inner">
+            <!-- Il contenuto verrà inserito qui tramite JavaScript -->
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <!-- X (Twitter) -->
+                <a href="https://twitter.com/yourprofile" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                <!-- Discord -->
+                <a href="https://discord.gg/yourserver" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <!-- Telegram -->
+                <a href="https://t.me/yourchannel" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="copyright-text">© 2023 WILDUNK. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funzione per mostrare/nascondere il menu
+        function toggleMenu() {
+            var menu = document.getElementById('sideMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Dati di tutte le squadre
+        const teams = {
+            "atlantis-knights": {
+                name: "Atlantis Knights",
+                logo: "squadre/1-atlantis-knights.png",
+                description: "Gli Atlantis Knights sono una squadra leggendaria, emersa dalle profondità oceaniche. Noti per la loro strategia impeccabile e la loro capacità di adattarsi a qualsiasi condizione, sono un avversario temibile sul campo da gioco. La loro forza risiede nella coesione e nella misteriosa energia che li lega al loro elemento nativo, rendendoli maestri delle manovre inaspettate e delle difese impenetrabili. La loro storia è intrisa di vittorie epiche e di un impegno inarrestabile verso l'eccellenza."
+            },
+            "savage-ape": {
+                name: "Savage Ape",
+                logo: "squadre/2-savage-ape.png",
+                description: "I Savage Ape sono una squadra dalla potenza bruta e dalla agilità sorprendente. La loro tattica si basa su attacchi rapidi e travolgenti, spesso lasciando gli avversari disorientati. Con una leadership forte e un'energia inesauribile, questi guerrieri della giungla sono sempre pronti a scatenare la loro furia sul campo, dimostrando che la forza della natura è la loro migliore alleata."
+            },
+            "jurassic-stars": {
+                name: "Jurassic Stars",
+                logo: "squadre/3-jurassic-stars.png",
+                description: "Le Jurassic Stars sono una squadra che trae ispirazione dal potere e dalla grandezza dei dinosauri. Con una combinazione di forza antica e tecniche moderne, dominano il campo con la loro presenza imponente. Ogni membro è un 'fossile vivente' di talento, capace di evolversi e sorprendere, rendendoli una delle squadre più spettacolari e imprevedibili del campionato."
+            },
+            "madogs": {
+                name: "Madogs",
+                logo: "squadre/4-madogs.png",
+                description: "I Madogs sono una squadra selvaggia e indomita, famosa per la loro tenacia e la loro aggressività controllata. Ogni partita è una battaglia che affrontano con ferocia e determinazione, non lasciando mai spazio agli avversari. La loro resilienza è pari solo alla loro sete di vittoria, il che li rende una delle squadre più difficili da affrontare e da sconfiggere."
+            },
+            "red-neck": {
+                name: "Red-Neck",
+                logo: "squadre/5-red-neck.png",
+                description: "I Red-Neck sono la quintessenza della resilienza e dell'astuzia. Provenienti da ambienti rurali, portano sul campo una mentalità 'never-give-up' e una sorprendente inventiva. Nonostante possano essere sottovalutati, la loro capacità di sfruttare ogni debolezza avversaria e di collaborare in modo impeccabile li rende un avversario formidabile, sempre pronto a ribaltare il pronostico."
+            },
+            "patriots": {
+                name: "Patriots",
+                logo: "squadre/6-patriots.png",
+                description: "I Patriots incarnano lo spirito di disciplina e precisione. Con un approccio strategico e un gioco di squadra impeccabile, mirano alla perfezione in ogni azione. La loro dedizione all'allenamento e l'attenzione ai dettagli li rendono una forza costante, capaci di eseguire manovre complesse con una fluidità impressionante, guadagnandosi il rispetto di tutti."
+            },
+            "savana-clippers": {
+                name: "Savana Clippers",
+                logo: "squadre/7-savana-clippers.png",
+                description: "Le Savana Clippers sono una squadra che evoca l'agilità e la rapidità dei predatori della savana. Con movimenti fulminei e un'ottima coordinazione, tagliano il campo con precisione. La loro velocità e la capacità di transizione rapida li rendono inafferrabili, capaci di creare opportunità dal nulla e di colpire quando meno te lo aspetti."
+            },
+            "golden": {
+                name: "Golden",
+                logo: "squadre/8-golden.png",
+                description: "I Golden sono sinonimo di eccellenza e successo. Ogni loro mossa sul campo brilla per la sua perfezione, e la loro bacheca è costellata di trofei. La loro mentalità vincente è contagiosa, spingendoli a superare ogni limite. Sono la squadra da battere, un'ispirazione per tutti, e la loro legacy è fatta di prestazioni brillanti e indimenticabili."
+            },
+            "northern": {
+                name: "Northern",
+                logo: "squadre/9-northern.png",
+                description: "I Northern sono una squadra forgiata nel freddo e nella resilienza. Dotati di una forza fisica incredibile e una resistenza ineguagliabile, affrontano ogni sfida con impassibile determinazione. La loro capacità di sopportare la pressione e di mantenere la calma anche nelle situazioni più estreme li rende un avversario stoico e difficile da scalfire, sempre pronti a una lotta estenuante."
+            },
+            "aussie": {
+                name: "Aussie",
+                logo: "squadre/10-aussie.png",
+                description: "Gli Aussie portano sul campo lo spirito energico e versatile dell'Australia. Con un mix di agilità, creatività e un tocco di esuberanza, sono una squadra che non smette mai di sorprendere. La loro abilità nel gioco di squadra e la capacità di improvvisare li rendono avversari divertenti da guardare, ma estremamente difficili da prevedere e contrastare."
+            }
+        };
+
+        // Funzione per mostrare la pagina di una squadra
+        function showTeamPage(teamId) {
+            const homepageContent = document.getElementById('homepage-content');
+            const teamPageDisplay = document.getElementById('team-page-display');
+            const teamContentInner = teamPageDisplay.querySelector('.team-content-inner');
+            const team = teams[teamId];
+
+            if (team) {
+                // Costruisci il contenuto della pagina squadra
+                teamContentInner.innerHTML = `
+                    <h1>${team.name}</h1>
+                    <img src="${team.logo}" alt="${team.name} Logo">
+                    <p>${team.description}</p>
+                    <a href="#" onclick="showHomepage(); return false;" class="back-to-home-btn">Torna alla Homepage</a>
+                `;
+
+                homepageContent.style.display = 'none'; // Nasconde la homepage
+                teamPageDisplay.style.display = 'flex'; // Mostra la pagina della squadra
+            } else {
+                console.error("Squadra non trovata:", teamId);
+                // Potresti mostrare un messaggio di errore all'utente qui
+                showHomepage(); // Torna alla homepage in caso di errore
+            }
+            toggleMenu(); // Chiude il menu dopo la selezione
+        }
+
+        // Funzione per tornare alla homepage
+        function showHomepage() {
+            const homepageContent = document.getElementById('homepage-content');
+            const teamPageDisplay = document.getElementById('team-page-display');
+
+            homepageContent.style.display = 'flex'; // Mostra la homepage
+            teamPageDisplay.style.display = 'none'; // Nasconde la pagina della squadra
+            toggleMenu(); // Chiude il menu se aperto
+        }
+
+        // Inizializza la pagina mostrando la homepage all'inizio
+        document.addEventListener('DOMContentLoaded', showHomepage);
+    </script>
+</body>
+</html>

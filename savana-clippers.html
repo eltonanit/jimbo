@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WILDUNK</title>
+    <title>WILDUNK - Savana Clippers</title>
     <!-- Collegamento a Font Awesome per le icone social -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Collegamento a Google Fonts: Montserrat -->
@@ -17,7 +17,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #100329;
+            background-color: #100329; /* Sfondo generale scuro */
         }
 
         /* Stili Navbar */
@@ -38,6 +38,10 @@
 
         .navbar-logo img {
             height: 40px;
+        }
+
+        .navbar-logo a {
+            cursor: pointer; /* Indica che il logo è cliccabile */
         }
 
         .hamburger-icon {
@@ -109,15 +113,20 @@
             display: block;
         }
 
-        /* Nuovo Wrapper per Immagine e Bottoni */
+        /* Nuovo Wrapper per Immagine e Bottoni (Homepage) */
+        #homepage-content {
+            margin-top: 60px; /* Spazio per la navbar fissa */
+            width: 100%; /* Occupa tutta la larghezza per contenere l'image-content-wrapper */
+            display: flex;
+            justify-content: center; /* Centra l'image-content-wrapper */
+        }
+
         .image-content-wrapper {
             position: relative;
             width: 400px;
             max-width: 100%;
             height: auto;
-            margin-top: 60px; /* Spazio per la navbar fissa */
-            margin-left: auto;
-            margin-right: auto;
+            /* margin-top rimosso da qui perché è su #homepage-content */
         }
 
         img.sito-image {
@@ -162,6 +171,70 @@
         .button-3 { top: 98.00%; }
 
 
+        /* Stili per la pagina delle singole squadre (dinamica) */
+        #team-page-display {
+            display: flex; /* Mostrato di default per le pagine delle squadre */
+            width: 100%;
+            padding-top: 60px; /* Spazio per la navbar fissa */
+            min-height: calc(100vh - 60px); /* Assicura che occupi almeno l'altezza della viewport meno la navbar */
+            background-color: #1E0F3D; /* Viola/blu scuro come richiesto */
+            color: white; /* Testo bianco */
+            box-sizing: border-box;
+            flex-grow: 1; /* Permette al team page di occupare lo spazio disponibile sopra il footer */
+            flex-direction: column;
+            align-items: center; /* Centra il contenuto orizzontalmente */
+        }
+
+        .team-content-inner {
+            text-align: center; /* Centra testo e immagini all'interno */
+            padding: 30px 20px;
+            max-width: 700px; /* Larghezza massima per il contenuto per una migliore leggibilità */
+            margin: 20px auto; /* Margine per distanziare dai bordi e centrare */
+            box-sizing: border-box; /* Include padding nel width */
+        }
+
+        .team-content-inner h1 {
+            text-transform: uppercase; /* Nome della squadra in maiuscolo */
+            font-size: 2.8em; /* Dimensione del font più grande */
+            margin-bottom: 25px;
+            font-weight: 700; /* Grassetto per il nome della squadra */
+            line-height: 1.2;
+        }
+
+        .team-content-inner img {
+            max-width: 200px; /* Dimensione del logo della squadra */
+            height: auto;
+            margin-bottom: 30px;
+            display: block; /* Per centrare l'immagine con margin: auto */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-content-inner p {
+            font-size: 1.1em; /* Dimensione della descrizione */
+            line-height: 1.8; /* Altezza della riga per una migliore leggibilità */
+            text-align: justify; /* Testo giustificato per un look pulito */
+            margin-bottom: 20px;
+        }
+
+        .back-to-home-btn {
+            background-color: #6A37FF; /* Un colore coerente o un nuovo colore */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 30px; /* Spazio dal testo sopra */
+            display: inline-block; /* Per permettere margin auto o centratura */
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-home-btn:hover {
+            background-color: #552AE6;
+        }
+
         /* Stili per il footer */
         .site-footer {
             background-color: #3a1775; /* Sfondo viola scuro */
@@ -169,7 +242,7 @@
             padding: 30px 20px;
             width: 100%;
             box-sizing: border-box;
-            margin-top: auto;
+            margin-top: auto; /* Spinge il footer in fondo */
             flex-shrink: 0;
         }
 
@@ -218,69 +291,70 @@
 <body>
     <nav class="navbar">
         <div class="navbar-logo">
-            <a href="j2.html"><img src="img/logo.png" alt="Logo"></a>
+            <!-- Il logo della navbar ora ha una funzione per tornare alla homepage -->
+            <a href="#" onclick="showHomepage(); return false;"><img src="img/logo.png" alt="Logo WILDUNK"></a>
         </div>
         <div class="hamburger-icon" onclick="toggleMenu()">☰</div>
     </nav>
     <div class="menu" id="sideMenu">
         <ul>
-            <!-- Ogni link ora punta al suo file HTML di squadra -->
+            <!-- Ogni link ora chiama la funzione showTeamPage con l'ID della squadra -->
             <li>
-                <a href="atlantis-knights.html"> <!-- Link aggiornato -->
+                <a href="atlantis-knights.html">
                     <img src="squadre/1-atlantis-knights.png" alt="Atlantis Knights Logo">
                     <span>Atlantis Knights</span>
                 </a>
             </li>
             <li>
-                <a href="savage-ape.html"> <!-- Link aggiornato -->
+                <a href="savage-ape.html">
                     <img src="squadre/2-savage-ape.png" alt="Savage Ape Logo">
                     <span>Savage Ape</span>
                 </a>
             </li>
             <li>
-                <a href="jurassic-stars.html"> <!-- Link aggiornato -->
+                <a href="jurassic-stars.html">
                     <img src="squadre/3-jurassic-stars.png" alt="Jurassic Stars Logo">
                     <span>Jurassic Stars</span>
                 </a>
             </li>
             <li>
-                <a href="madogs.html"> <!-- Link aggiornato -->
+                <a href="madogs.html">
                     <img src="squadre/4-madogs.png" alt="Madogs Logo">
                     <span>Madogs</span>
                 </a>
             </li>
             <li>
-                <a href="red-neck.html"> <!-- Link aggiornato -->
+                <a href="red-neck.html">
                     <img src="squadre/5-red-neck.png" alt="Red-Neck Logo">
                     <span>Red-Neck</span>
                 </a>
             </li>
             <li>
-                <a href="patriots.html"> <!-- Link aggiornato -->
+                <a href="patriots.html">
                     <img src="squadre/6-patriots.png" alt="Patriots Logo">
                     <span>Patriots</span>
                 </a>
             </li>
             <li>
-                <a href="savana-clippers.html"> <!-- Link aggiornato -->
+                <a href="savana-clippers.html">
                     <img src="squadre/7-savana-clippers.png" alt="Savana Clippers Logo">
                     <span>Savana Clippers</span>
                 </a>
             </li>
             <li>
-                <a href="golden.html"> <!-- Link aggiornato -->
+                <a href="golden.html">
                     <img src="squadre/8-golden.png" alt="Golden Logo">
                     <span>Golden</span>
                 </a>
             </li>
             <li>
-                <a href="northern.html"> <!-- Link aggiornato -->
+                <a href="northern.html">
                     <img src="squadre/9-northern.png" alt="Northern Logo">
                     <span>Northern</span>
                 </a>
             </li>
             <li>
-                <a href="aussie.html"> <!-- Link aggiornato -->
+                <a href="aussie.html">
                     <img src="squadre/10-aussie.png" alt="Aussie Logo">
                     <span>Aussie</span>
                 </a>
@@ -288,12 +362,25 @@
         </ul>
     </div>
 
-    <div class="image-content-wrapper">
-        <img src="img/SITO.png" alt="Sito Jimbo" class="sito-image">
+    <!-- Contenuto della Homepage (nascosto per le pagine delle squadre) -->
+    <div id="homepage-content" style="display: none;">
+        <div class="image-content-wrapper">
+            <img src="img/SITO.png" alt="Sito Jimbo" class="sito-image">
 
-        <a href="https://magiceden.io/solana" class="collection-button button-1" target="_blank">View Collection</a>
-        <a href="https://magiceden.io/solana" class="collection-button button-2" target="_blank">View Collection</a>
-        <a href="https://magiceden.io/solana" class="collection-button button-3" target="_blank">View Collection</a>
+            <a href="https://magiceden.io/solana" class="collection-button button-1" target="_blank">View Collection</a>
+            <a href="https://magiceden.io/solana" class="collection-button button-2" target="_blank">View Collection</a>
+            <a href="https://magiceden.io/solana" class="collection-button button-3" target="_blank">View Collection</a>
+        </div>
+    </div>
+
+    <!-- Contenuto della Pagina Squadra (mostrato per le pagine delle squadre) -->
+    <div id="team-page-display">
+        <div class="team-content-inner">
+            <h1>Patriots</h1>
+            <img src="squadre/6-patriots.png" alt="Patriots Logo">
+            <p>I Patriots sono una squadra che incarna l'orgoglio e la disciplina. Con una strategia impeccabile e un'esecuzione precisa, dominano il campo con la loro organizzazione e il loro spirito di squadra. Ogni membro è un soldato fedele alla causa, pronto a difendere il proprio territorio con onore e determinazione, rendendoli una forza inarrestabile.</p>
+            <a href="index.html" class="back-to-home-btn">Torna alla Homepage</a>
+        </div>
     </div>
 
     <footer class="site-footer">
@@ -313,11 +400,19 @@
             <p class="copyright-text">© 2023 WILDUNK. Tutti i diritti riservati.</p>
         </div>
     </footer>
+
+    <script>
+        // Funzione per mostrare/nascondere il menu
+        function toggleMenu() {
+            var menu = document.getElementById('sideMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Le funzioni showHomepage e showTeamPage non sono necessarie in queste pagine statiche
+        // ma i link nel menu devono puntare alle pagine corrette.
+
+        // Rimuovi l'inizializzazione della homepage se questa è una pagina statica di squadra
+        // document.addEventListener('DOMContentLoaded', showHomepage);
+    </script>
 </body>
-<script>
-    function toggleMenu() {
-        var menu = document.getElementById('sideMenu');
-        menu.classList.toggle('active');
-    }
-</script>
 </html>
